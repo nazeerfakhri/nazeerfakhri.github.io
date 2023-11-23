@@ -1,0 +1,128 @@
+<!--
+	Name: Nazeer fakhri
+	File: assignment 4 part 2 - Image gallery - nazeer fakhri - inft1206
+	Date:  2023-11-22
+	description of the file: in this html file contains a website about a image gallery
+-->
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <!--added css style-->
+  <style>
+    h1 {
+      font-family: helvetica, arial, sans-serif;
+      text-align: center;
+    }
+  
+    body {
+      width: 640px;
+      margin: 0 auto;
+    }
+  
+    
+  
+    .full-img {
+      position: relative;
+      display: block;
+      width: 640px;
+      height: 480px;
+    }
+  
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 640px;
+      height: 480px;
+      background-color: rgba(0, 0, 0, 0);
+    }
+  
+    button {
+      border: 0;
+      background: rgba(150, 150, 150, 0.6);
+      text-shadow: 1px 1px 1px white;
+      border: 1px solid #999;
+      position: absolute;
+      cursor: pointer;
+      top: 2px;
+      left: 2px;
+    }
+  
+    .thumb-bar img {
+      display: block;
+      width: 20%;
+      float: left;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <!--added header one-->
+  <h1>Image gallery example</h1>
+  <div class="full-img">
+    <!-- added online image URLs for src attribute -->
+    <img class="displayed-img" src="c:\Users\nazir\Downloads\pic1 eye.jpg" alt="Closeup of a human eye" />
+    <div class="overlay"></div>
+    <!--added darken button class-->
+    <button class="dark">Darken</button>
+  </div>
+  <div class="thumb-bar"></div>
+<!--created and added script-->
+  <script>
+    const displayedImage = document.querySelector(".displayed-img");
+    const thumbBar = document.querySelector(".thumb-bar");
+    const btn = document.querySelector("button");
+    const overlay = document.querySelector(".overlay");
+
+    
+    const imgSrcAltText = [
+      {
+        url: "https://mdn.github.io/learning-area/javascript/building-blocks/gallery/images/pic1.jpg",
+        alt: "Closeup of a human eye"
+      },
+      {
+        url: "https://mdn.github.io/learning-area/javascript/building-blocks/gallery/images/pic2.jpg",
+        alt: "An obscure marble stone"
+      },
+      {
+        url: "https://mdn.github.io/learning-area/javascript/building-blocks/gallery/images/pic3.jpg",
+        alt: "Bunch of brunfelsia pauciflora"
+      },
+      {
+        url: "https://mdn.github.io/learning-area/javascript/building-blocks/gallery/images/pic4.jpg",
+        alt: "An egyptian ancient wall-painting demonstrating human behavior"
+      },
+      {
+        url: "https://mdn.github.io/learning-area/javascript/building-blocks/gallery/images/pic5.jpg",
+        alt: "A butterfly sitting over a large leaf"
+      }
+    ];
+
+    
+    for (let imgItem of imgSrcAltText) {
+      const newImage = document.createElement("img");
+      newImage.setAttribute("src", imgItem.url);
+      newImage.setAttribute("alt", imgItem.alt);
+      thumbBar.appendChild(newImage);
+
+      newImage.addEventListener("click", (e) => {
+        displayedImage.src = e.target.src;
+        displayedImage.alt = e.target.alt;
+      });
+    }
+
+    
+    btn.addEventListener("click", (e) => {
+      if (e.target.getAttribute("class") === "dark") {
+        e.target.setAttribute("class", "light");
+        e.target.textContent = "Lighten";
+        overlay.style.backgroundColor = "rgba(0,0,0,0.5)";
+      } else {
+        e.target.setAttribute("class", "dark");
+        e.target.textContent = "Darken";
+        overlay.style.backgroundColor = "rgba(0,0,0,0)";
+      }
+    });
+  </script>
+</body>
+</html>
